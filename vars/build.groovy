@@ -7,16 +7,19 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                script {
-                    def values = [:]
+                node('jenkinsb0'){
+                    script {
+                        def values = [:]
                     
-                    closure.resolveStrategy = Closure.DELEGATE_FIRST
-                    closure.delegate = values
+                        closure.resolveStrategy = Closure.DELEGATE_FIRST
+                        closure.delegate = values
                     
-                    closure.call(env)
+                        closure.call(env)
                     
-                    echo values.toString()
+                        echo values.toString()
+                    }
                 }
+                
             }
         }
     }
